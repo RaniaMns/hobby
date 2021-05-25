@@ -1,0 +1,21 @@
+.general {
+  width: 110px;
+  margin: 2px;
+  padding: 5px;
+  border-radius: 2px;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.buttons {
+  margin-right: 50px;
+}
+
+.Login {
+  color: #ffffff !important;
+  background: #111b47;
+}
+.Register {
+  background: #ffd166;
+  color: #111b47 !important;
+}

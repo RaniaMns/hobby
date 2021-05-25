@@ -8,14 +8,15 @@ async function getEvent() {
 }
 
 async function ajoutEvent(event) {
-  http.post(apiEndpoint  + event.id,{
+  console.log("event from eventService : ", event);
+  return await http.post(apiEndpoint, {
     name: event.name,
     description: event.description,
     place: event.place,
     date: event.date,
   });
-  console.log(event.nom);
 }
+
 async function deleteEvent(event) {
   http.delete(apiEndpoint + event.id);
 }

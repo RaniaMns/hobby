@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import "./navbar.css";
 const Navbar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -8,7 +8,10 @@ const Navbar = ({ user }) => {
         HOBBYIST
       </a>
 
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div
+        className="collapse navbar-collapse nav-masthead justify-content-end"
+        id="navbarNavAltMarkup"
+      >
         <div className="navbar-nav">
           <NavLink className="nav-link " to="/">
             Home
@@ -16,12 +19,24 @@ const Navbar = ({ user }) => {
           <NavLink className="nav-link" to="/profile">
             Profile
           </NavLink>
-          <NavLink className="nav-link" to="/login">
-            Login
-          </NavLink>
-          <NavLink className="nav-link" to="/register">
-            Register
-          </NavLink>
+
+          {user && (
+            <React.Fragment>
+              <NavLink className="nav-link" to="/logout">
+                Logout
+              </NavLink>
+            </React.Fragment>
+          )}
+          {!user && (
+            <React.Fragment>
+              <NavLink className="nav-link general  Login" to="/login">
+                Login
+              </NavLink>
+              <NavLink className="nav-link general Register" to="/register">
+                Register
+              </NavLink>
+            </React.Fragment>
+          )}
         </div>
       </div>
     </nav>

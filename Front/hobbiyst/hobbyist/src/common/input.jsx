@@ -2,7 +2,7 @@ import React from "react";
 
 const Input = ({ name, label, error, ...rest }) => {
   return (
-    <div className="form-group  d-flex justify-content-center col-sm-5">
+    <div className="col-sm-7 ">
       <label htmlFor={name}>{label} </label>
 
       <input

@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import Form from "../common/form";
 import auth from "../services/authService";
 import { Redirect } from "react-router-dom";
+import { ReactComponent as LoginSvg } from "../assets/login.svg";
 
 class LoginForm extends Form {
   state = {
@@ -37,13 +38,23 @@ class LoginForm extends Form {
   render() {
     if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
-      <div>
+      <div className="container d-flex flex-column justify-content-around align-self-center">
         <h1>Login </h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Username")}
-          {this.renderInput("password", "Password", "password")}
-          {this.renderButton("Login")}
-        </form>
+
+        <div className="row">
+          <div className="col-6">
+            <form onSubmit={this.handleSubmit} className="d-flex flex-column">
+              {this.renderInput("username", "Username")}
+              {this.renderInput("password", "Password", "password")}
+              {this.renderButton("Login")}
+            </form>
+          </div>
+
+          <LoginSvg
+            className="col-6"
+            style={{ width: "100 px", height: "350px" }}
+          />
+        </div>
       </div>
     );
   }
