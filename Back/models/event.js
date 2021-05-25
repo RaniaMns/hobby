@@ -1,5 +1,7 @@
 const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
+const { User } = require("./user");
 
 const eventSchema = new mongoose.Schema({
   name: {
@@ -22,6 +24,10 @@ const eventSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   date: Date,
+  attendees: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  tags: {
+    type: String,
+  },
 });
 
 /*userSchema.methods.generateAuthToken = function () {
@@ -45,6 +51,8 @@ function validateEvent(event) {
     description: Joi.string().min(5).max(255).required(),
     place: Joi.string().min(5).max(255).required(),
     date: Joi.date(),
+    tags: Joi.string(),
+    attendees: Joi.array().items(Joi.objectId()),
   });
 
   return schema.validate(event);

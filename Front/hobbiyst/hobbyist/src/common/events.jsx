@@ -1,6 +1,6 @@
 import {Form, Container,  FormGroup, FormLabel, Button } from "react-bootstrap";
 import React from "react";
-import event from "../services/eventService";
+import Event from "../services/eventService";
 import EditDeleteEvent from "./EditDeleteEvent";
 
 
@@ -50,10 +50,19 @@ class Events extends React.Component {
       break;
     }}
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
+    console.log("heeee");
   e.preventDefault();
-  event.ajoutEvent(this.state);
- console.log(this.state);	 
+  const event = {
+    name : this.state.nom,
+    description : this.state.description,
+    place : this.state.lieu,
+    date: this.state.date 
+  }
+
+  const response = await Event.ajoutEvent(event );
+ console.log(this.state);
+ console.log("response :  " , response);	 
   }
 
   Annuler = () => { 
@@ -142,7 +151,7 @@ handleSubmit(event) {
  
         </div>
         <div>
-        { this.state.affiche==1? <EditDeleteEvent/> 
+        { this.state.affiche===1? <EditDeleteEvent/> 
         : null }
         </div>
        </Container>

@@ -5,12 +5,17 @@ const auth = require("../middleware/auth");
 const { Event, validate } = require("../models/event");
 
 router.get("/", auth, async (req, res) => {
-  const event = await Event.findOne(req.body.name);
+  const event = await Event.find(req.body.name);
+
+  res.send(event);
+});
+router.get("/:id", auth, async (req, res) => {
+  const event = await Event.findOne({ id: req.params.id });
 
   res.send(event);
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

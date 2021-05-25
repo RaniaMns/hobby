@@ -2,6 +2,7 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const { Event } = require("./event");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -24,6 +25,8 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   isAdmin: Boolean,
+  interests: [{ tags: String, nb: Number }],
+  favourites: [{ type: mongoose.Types.ObjectId, ref: Event }],
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -39,7 +42,7 @@ userSchema.methods.generateAuthToken = function () {
   return token;
 };
 
-const Event = mongoose.model("user", userSchema);
+const User = mongoose.model("user", userSchema);
 
 function validateUser(user) {
   const schema = Joi.object({
@@ -51,5 +54,5 @@ function validateUser(user) {
   return schema.validate(user);
 }
 
-exports.Event = Event;
+exports.User = User;
 exports.validate = validateUser;
