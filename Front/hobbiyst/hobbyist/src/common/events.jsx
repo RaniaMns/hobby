@@ -50,6 +50,20 @@ class Events extends React.Component {
       break;
     }}
 
+    Annuler = () => { 
+      this.setState({
+        nom:"",
+        description:"",
+        lieu:"",
+        date:"", 
+      });
+      this.refs.nom.value="";
+      this.refs.description.value="";
+      this.refs.lieu.value="";
+      this.refs.date.value="";
+  
+    }
+
   async handleSubmit(e) {
     console.log("heeee");
   e.preventDefault();
@@ -59,25 +73,18 @@ class Events extends React.Component {
     place : this.state.lieu,
     date: this.state.date 
   }
+ 
+
 
   const response = await Event.ajoutEvent(event );
- console.log(this.state);
- console.log("response :  " , response);	 
+
+  
+
+ //console.log(this.state);
+ //console.log("response :  " , response);	 
   }
 
-  Annuler = () => { 
-    this.setState({
-      nom:"",
-      description:"",
-      lieu:"",
-      date:"", 
-    });
-    this.refs.nom.value="";
-    this.refs.description.value="";
-    this.refs.lieu.value="";
-    this.refs.date.value="";
 
-  }
   handleAffiche(){ 
     this.setState({affiche:1});
   }
@@ -105,7 +112,7 @@ handleSubmit(event) {
           
 
           <hr></hr>
-                    <Form class="form-group">
+                    <Form class="form-group" id="f1">
                                  <FormGroup>
                                   <FormLabel>Nom</FormLabel>
                                   <input className="form-control"  ref="nom"  type="text" name="nom" placeholder="Intitulé de l'évenement"  required  onChange={this.handleInputChange} />

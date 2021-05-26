@@ -18,6 +18,7 @@ async function ajoutEvent(event) {
 }
 
 async function deleteEvent(event) {
+  console.log(event);
   http.delete(apiEndpoint + event.id);
 }
 

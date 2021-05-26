@@ -1,3 +1,7 @@
+
+
+
+
 import React from "react";
 import event from "../services/eventService";
 
@@ -11,12 +15,7 @@ class EditDeleteEvent extends React.Component {
     // this.retrieveTutorials = this.retrieveTutorials.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
-  /*  componentDidMount() {
-       this.setState({isLoading: true});
-       const response=event.getEvent();
-        this.setState({ evenements: response , isLoading: false});
-        this.retrieveTutorials();
-      }*/
+ 
 
   componentDidMount() {
     event
@@ -25,12 +24,17 @@ class EditDeleteEvent extends React.Component {
         this.setState({
           evenements: response.data,
         });
-        console.log(response.data, 1);
+        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
   }
+
+  deleteEvent(evt){
+    event.deleteEvent(evt)
+  }
+
 
   // onClick={() => {event.deleteEvent(evt)}}
   /*
@@ -74,27 +78,27 @@ class EditDeleteEvent extends React.Component {
             </tr>
           </thead>
           <tbody>
+       {this.state.evenements.map((elm) => (
             <tr>
-              <td>{this.state.evenements.name}</td>
-              <td>{this.state.evenements.description}</td>
-              <td>{this.state.evenements.place}</td>
-              <td>{this.state.evenements.date}</td>
+              <td>{elm.name}</td>
+              <td>{elm.description}</td>
+              <td>{elm.place}</td>
+              <td>{elm.date}</td>
               <td>
                 <button
                   class="btn btn-danger"
                   onClick={() => {
-                    event.deleteEvent(this.state.evenements);
+                    event.deleteEvent(elm);
                   }}
                 >
                   {" "}
                   Supprimer
                 </button>
                 &nbsp;&nbsp;
-                <a href="" class="btn btn-outline-primary mr-2">
-                  Modifier
-                </a>
+             
               </td>
             </tr>
+            ))} 
           </tbody>
         </table>
       </div>
